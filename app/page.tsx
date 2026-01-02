@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react"
-import Image from "next/image"
-import { ProjectGrid } from "@/components/project-grid"
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
+import { TopNav } from "@/components/top-nav"
 
-const tabs = ["vibe", "timeline", "projects"] as const
+const tabs = ["timeline", "experiments"] as const
 type Tab = (typeof tabs)[number]
 
 const timelineData = [
@@ -41,6 +41,7 @@ const timelineData = [
   },
 ]
 
+// Temporarily hidden - vibe tab data
 const vibeProjects = [
   { title: "SpaceX Spacesuit", year: "2015", slug: "spacex-spacesuit" },
   { title: "James Turrell for Guggenheim", year: "2013", slug: "james-turrell-guggenheim" },
@@ -62,57 +63,47 @@ const vibeProjects = [
   { title: "Swiss Army Knife", year: "1891", slug: "swiss-army-knife" },
 ]
 
-const projectsData = [
+const experimentsData = [
   { name: "Parrot", category: "Productivity", year: "2025", slug: "parrot" },
   { name: "Bill", category: "Fintech", year: "2024", slug: "bill" },
-  { name: "Lovemail", category: "Productivity", year: "2023", slug: "lovemail" },
-  { name: "Klar", category: "Fintech", year: "2022", slug: "klar" },
-  { name: "N26", category: "Fintech", year: "2021", slug: "n26" },
-  { name: "Apple Card", category: "Fintech", year: "2019", slug: "apple-card" },
-  { name: "Monzo", category: "Fintech", year: "2018", slug: "monzo" },
-  { name: "Revolut", category: "Fintech", year: "2017", slug: "revolut" },
 ]
 
 export default function HomePage() {
-  const [activeTab, setActiveTab] = useState<Tab>("timeline")
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get("tab")
+  const initialTab = tabs.includes(tabParam as Tab) ? (tabParam as Tab) : "timeline"
+  const [activeTab, setActiveTab] = useState<Tab>(initialTab)
+
+  useEffect(() => {
+    if (tabParam && tabs.includes(tabParam as Tab)) {
+      setActiveTab(tabParam as Tab)
+    }
+  }, [tabParam])
 
   return (
     <main className="min-h-screen bg-black text-white">
-      {/* Header with profile and tabs */}
       <div className="container mx-auto px-6 py-8 max-w-6xl">
-        <div className="flex items-center gap-12 mb-16">
-          <Image src="/professional-headshot.png" alt="David Quiring" width={80} height={80} className="rounded-full" />
-
-          <nav className="flex gap-8">
-            {tabs.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`text-2xl transition-colors ${
-                  activeTab === tab ? "text-white" : "text-zinc-600 hover:text-zinc-400"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </nav>
-        </div>
+        <TopNav
+          tabs={[...tabs]}
+          activeTab={activeTab}
+          onTabChange={(tab) => setActiveTab(tab as Tab)}
+        />
 
         {/* Timeline content */}
         {activeTab === "timeline" && (
-          <div className="space-y-20">
+          <div className="space-y-8">
             {timelineData.map((item, index) => (
-              <div key={index} className="grid grid-cols-[200px_1fr] gap-8">
-                <div className="text-zinc-500 text-lg">{item.years}</div>
-                <div className="space-y-2">
-                  <h2 className="text-2xl text-white">{item.title}</h2>
-                  {item.subtitle && <p className="text-zinc-500 text-lg">{item.subtitle}</p>}
+              <div key={index} className="grid grid-cols-[140px_1fr] gap-6">
+                <div className="opacity-40">{item.years}</div>
+                <div className="space-y-1">
+                  <h2 className="font-medium">{item.title}</h2>
+                  {item.subtitle && <p className="opacity-40">{item.subtitle}</p>}
                   {item.link && (
                     <a
                       href={`https://${item.link}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-zinc-500 text-lg hover:text-zinc-400 transition-colors inline-block"
+                      className="opacity-40 hover:opacity-60 transition-opacity inline-block"
                     >
                       {item.link}
                     </a>
@@ -123,22 +114,19 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Vibe content */}
-        {activeTab === "vibe" && (
-          <div>
-            <ProjectGrid />
-          </div>
-        )}
-
-        {/* Projects content */}
-        {activeTab === "projects" && (
-          <div className="space-y-12">
-            {projectsData.map((project, index) => (
-              <div key={index} className="grid grid-cols-3 gap-8">
-                <div className="text-white text-2xl">{project.name}</div>
-                <div className="text-zinc-500 text-2xl">{project.category}</div>
-                <div className="text-zinc-500 text-2xl">{project.year}</div>
-              </div>
+        {/* Experiments content */}
+        {activeTab === "experiments" && (
+          <div className="space-y-4">
+            {experimentsData.map((experiment, index) => (
+              <a
+                key={index}
+                href={`/experiment/${experiment.slug}`}
+                className="grid grid-cols-3 gap-6 hover:opacity-60 transition-opacity"
+              >
+                <div className="font-medium">{experiment.name}</div>
+                <div className="opacity-40">{experiment.category}</div>
+                <div className="opacity-40">{experiment.year}</div>
+              </a>
             ))}
           </div>
         )}
