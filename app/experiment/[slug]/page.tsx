@@ -236,7 +236,7 @@ export default async function ExperimentPage({ params }: { params: Promise<{ slu
           </div>
 
           {experiment.actions && (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {experiment.actions.primary && (
                 <a href={experiment.actions.primary.href} className="flex items-center gap-2 opacity-40 hover:opacity-60 transition-opacity">
                   <ActionIcon type={slug === "bill" ? "phone" : "desktop"} />
@@ -244,7 +244,7 @@ export default async function ExperimentPage({ params }: { params: Promise<{ slu
                 </a>
               )}
               {experiment.actions.secondary && (
-                <a href={experiment.actions.secondary.href} className="flex items-center gap-2 hover:opacity-60 transition-opacity">
+                <a href={experiment.actions.secondary.href} className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full hover:bg-zinc-800 transition-colors">
                   <ActionIcon type={slug === "bill" ? "apple" : "mail"} />
                   {experiment.actions.secondary.label}
                 </a>
