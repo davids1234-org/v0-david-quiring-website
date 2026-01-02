@@ -99,8 +99,8 @@ const experimentDetails: Record<string, Experiment> = {
       },
     ],
     actions: {
-      primary: { label: "For iOS", href: "#" },
-      secondary: { label: "Download", href: "#" },
+      primary: { label: "For iOS", href: "https://apps.apple.com/bw/app/bill-ai/id6740485275" },
+      secondary: { label: "Download", href: "https://apps.apple.com/bw/app/bill-ai/id6740485275" },
     },
   },
 }
