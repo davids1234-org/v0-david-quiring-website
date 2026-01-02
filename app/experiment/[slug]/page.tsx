@@ -276,7 +276,7 @@ export default async function ExperimentPage({ params }: { params: Promise<{ slu
             {experiment.screenshots.map((screenshot, index) => (
               <div
                 key={index}
-                className="relative w-[280px] aspect-[9/19] rounded-[2.5rem] bg-zinc-800 shadow-lg overflow-hidden"
+                className="relative w-[280px] aspect-[9/19] rounded-[1.5rem] bg-zinc-800 shadow-lg overflow-hidden"
               >
                 <Image
                   src={screenshot}
