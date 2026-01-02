@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { TopNav } from "@/components/top-nav"
 
@@ -68,7 +68,7 @@ const experimentsData = [
   { name: "Bill", category: "Fintech", year: "2024", slug: "bill" },
 ]
 
-export default function HomePage() {
+function HomePageContent() {
   const searchParams = useSearchParams()
   const tabParam = searchParams.get("tab")
   const initialTab = tabs.includes(tabParam as Tab) ? (tabParam as Tab) : "timeline"
@@ -132,5 +132,13 @@ export default function HomePage() {
         )}
       </div>
     </main>
+  )
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <HomePageContent />
+    </Suspense>
   )
 }
