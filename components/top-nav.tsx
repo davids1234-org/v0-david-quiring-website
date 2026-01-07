@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 
-type ExperimentItem = {
+type SidequestItem = {
   name: string
   slug: string
 }
@@ -14,10 +14,10 @@ type TopNavProps = {
   onTabChange?: (tab: string) => void
   tabs?: string[]
   currentPage?: string
-  experiments?: ExperimentItem[]
+  sidequests?: SidequestItem[]
 }
 
-export function TopNav({ activeTab, onTabChange, tabs, currentPage, experiments }: TopNavProps) {
+export function TopNav({ activeTab, onTabChange, tabs, currentPage, sidequests }: TopNavProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   return (
@@ -57,7 +57,7 @@ export function TopNav({ activeTab, onTabChange, tabs, currentPage, experiments 
             )
           })}
 
-          {currentPage && experiments && experiments.length > 0 && (
+          {currentPage && sidequests && sidequests.length > 0 && (
             <div
               className="relative"
               onMouseEnter={() => setDropdownOpen(true)}
@@ -70,17 +70,17 @@ export function TopNav({ activeTab, onTabChange, tabs, currentPage, experiments 
               {dropdownOpen && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 z-50">
                   <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                    {experiments.map((exp) => (
+                    {sidequests.map((sq) => (
                       <Link
-                        key={exp.slug}
-                        href={`/experiment/${exp.slug}`}
+                        key={sq.slug}
+                        href={`/sidequest/${sq.slug}`}
                         className={`block px-4 py-2 transition-colors ${
-                          exp.name.toLowerCase() === currentPage
+                          sq.name.toLowerCase() === currentPage
                             ? "font-medium bg-zinc-100"
                             : "opacity-60 hover:opacity-100 hover:bg-zinc-50"
                         }`}
                       >
-                        {exp.name}
+                        {sq.name}
                       </Link>
                     ))}
                   </div>
@@ -89,7 +89,7 @@ export function TopNav({ activeTab, onTabChange, tabs, currentPage, experiments 
             </div>
           )}
 
-          {currentPage && (!experiments || experiments.length === 0) && (
+          {currentPage && (!sidequests || sidequests.length === 0) && (
             <span className="font-medium">{currentPage}</span>
           )}
         </div>

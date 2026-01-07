@@ -106,7 +106,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen">
       <div className="container mx-auto px-6 py-8 md:py-16">
         <Link href="/" className="inline-block text-zinc-500 hover:text-zinc-400 transition-colors mb-12 text-lg">
           ← back

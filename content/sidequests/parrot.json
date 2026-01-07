@@ -1,0 +1,56 @@
+{
+  "title": "Parrot",
+  "tagline": "Unified chat inbox with Agentic assistance",
+  "category": "Productivity",
+  "date": "2025-01",
+  "status": "alpha testing",
+  "logo": "/sidequests/parrot/logo.png",
+  "platform": "macos",
+  "screenshots": [
+    "/sidequests/parrot/screenshot.png"
+  ],
+  "pills": [
+    {
+      "icon": "chat",
+      "text": "For Busy Inboxes"
+    },
+    {
+      "icon": "smile",
+      "text": "Supporting Whatsapp, LinkedIn, Instagram, X, Telegram, etc"
+    }
+  ],
+  "features": [
+    {
+      "icon": "envelope",
+      "title": "One Inbox to rule them all.",
+      "description": "Have full overview and work through your communication dept in l"
+    },
+    {
+      "icon": "camera",
+      "title": "Scan Bills with your camera",
+      "description": "With on device OCR and local AI models Billy supports fully offline Bill scanning and analysis."
+    },
+    {
+      "icon": "currency",
+      "title": "Multi Currency Support",
+      "description": "Billy detects and converts 36 currency on device."
+    },
+    {
+      "icon": "pdf",
+      "title": "PDF Export",
+      "description": "Share your split bill with your friends in your groupchat by sharing a PDF file."
+    }
+  ],
+  "actions": {
+    "primary": {
+      "icon": "desktop",
+      "label": "For macOS",
+      "href": "#"
+    },
+    "secondary": {
+      "icon": "mail",
+      "label": "send mail",
+      "href": "mailto:hello@parrot.app"
+    }
+  }
+}
