@@ -1,6 +1,7 @@
 {
   "title": "Parrot",
-  "tagline": "Unified chat inbox with Agentic assistance",
+  "tagline": "Build Your Community, Not Your Backlog",
+  "subtagline": "The AI-powered inbox that helps creators, founders, and sales teams nurture thousands of relationships across every platform.",
   "category": "Productivity",
   "date": "2025-01",
   "status": "alpha testing",
@@ -9,47 +10,117 @@
   "screenshots": [
     "/sidequests/parrot/screenshot.png"
   ],
-  "pills": [
+  "pills": [],
+  "valueProps": [
     {
-      "icon": "chat",
-      "text": "For Busy Inboxes"
+      "title": "Never Miss a Fan",
+      "description": "Every DM matters. Parrot ensures no message falls through the cracks - whether it's a potential customer, a superfan, or your next collaborator."
     },
     {
-      "icon": "smile",
-      "text": "Supporting Whatsapp, LinkedIn, Instagram, X, Telegram, etc"
+      "title": "Scale Your Personal Touch",
+      "description": "AI that learned YOUR voice replies to your community authentically. They'll never know it wasn't you (unless you tell them)."
+    },
+    {
+      "title": "Relationships, Not Just Messages",
+      "description": "Built-in CRM tracks every interaction. Know who's engaged, who's slipping away, and who deserves your personal attention."
     }
+  ],
+  "audienceSections": [
+    {
+      "title": "For Creators & Influencers",
+      "points": [
+        "Manage DMs across Instagram, Twitter/X, Telegram, Discord - all in one view",
+        "Auto-respond to common questions while you create",
+        "Identify your most engaged fans with interaction stats",
+        "Keep your authentic voice in every reply"
+      ]
+    },
+    {
+      "title": "For Founders & Entrepreneurs",
+      "points": [
+        "Turn DMs into deals with built-in lead tracking",
+        "Autopilot agents qualify leads 24/7",
+        "Never ghost a potential customer again",
+        "CRM that works where your conversations happen"
+      ]
+    },
+    {
+      "title": "For Community Managers & Sales",
+      "points": [
+        "Kanban workflow: Unread → In Progress → Done",
+        "Batch reply to dozens of messages in minutes",
+        "Tag and categorize contacts by relationship type",
+        "Track response times and engagement patterns"
+      ]
+    }
+  ],
+  "featureSections": [
+    {
+      "headline": "Your voice. At scale.",
+      "description": "Parrot learns how you write from just 5 sample messages. Your emoji habits, your greeting style, your tone. When it replies, your community can't tell the difference - because it sounds exactly like you."
+    },
+    {
+      "headline": "Agents that never sleep.",
+      "description": "Set up autopilot agents to handle the repetitive stuff. They answer FAQs, qualify inbound leads, schedule calls, and keep conversations warm - all in your voice, all while you sleep."
+    },
+    {
+      "headline": "Every platform. One inbox.",
+      "description": "WhatsApp, Instagram, LinkedIn, Twitter/X, Telegram, Discord - all your conversations in one unified view. Stop context-switching. Start building relationships."
+    }
+  ],
+  "useCases": [
+    "Creator DMs",
+    "Lead qualification",
+    "Community management",
+    "Sales conversations",
+    "Influencer collabs",
+    "Customer support",
+    "Networking",
+    "Fan engagement",
+    "Partnership outreach",
+    "Hiring"
   ],
   "features": [
     {
-      "icon": "envelope",
-      "title": "One Inbox to rule them all.",
-      "description": "Have full overview and work through your communication dept in l"
+      "icon": "microphone",
+      "title": "Voice Matching AI",
+      "description": "Your replies sound like YOU - emoji habits, tone, everything"
     },
     {
-      "icon": "camera",
-      "title": "Scan Bills with your camera",
-      "description": "With on device OCR and local AI models Billy supports fully offline Bill scanning and analysis."
+      "icon": "robot",
+      "title": "Autopilot Agents",
+      "description": "Handle FAQs, schedule calls, nurture leads while you sleep"
     },
     {
-      "icon": "currency",
-      "title": "Multi Currency Support",
-      "description": "Billy detects and converts 36 currency on device."
+      "icon": "users",
+      "title": "Unified CRM",
+      "description": "See full history with any contact across ALL platforms"
     },
     {
-      "icon": "pdf",
-      "title": "PDF Export",
-      "description": "Share your split bill with your friends in your groupchat by sharing a PDF file."
+      "icon": "chart",
+      "title": "Interaction Stats",
+      "description": "Know who your superfans are, who needs re-engagement"
+    },
+    {
+      "icon": "globe",
+      "title": "10+ Platforms",
+      "description": "WhatsApp, Instagram, Telegram, Discord, LinkedIn, X..."
+    },
+    {
+      "icon": "kanban",
+      "title": "Kanban Board",
+      "description": "Visual workflow so nothing gets lost"
     }
   ],
   "actions": {
     "primary": {
       "icon": "desktop",
       "label": "For macOS",
-      "href": "#"
+      "href": "https://github.com/dvdqrng/parrot-tool/releases/latest"
     },
     "secondary": {
       "icon": "mail",
-      "label": "send mail",
+      "label": "Take back your inbox",
       "href": "mailto:hello@parrot.app"
     }
   }

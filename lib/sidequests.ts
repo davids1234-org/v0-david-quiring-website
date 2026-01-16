@@ -18,9 +18,29 @@ export type Action = {
   href: string
 }
 
+export type ValueProp = {
+  title: string
+  description: string
+}
+
+export type FeatureSection = {
+  headline: string
+  subheadline?: string
+  description: string
+  image?: string
+}
+
+export type AudienceSection = {
+  title: string
+  points: string[]
+}
+
+export type UseCase = string
+
 export type Sidequest = {
   title: string
   tagline: string
+  subtagline?: string
   category: string
   date: string // YYYY-MM format
   status: string
@@ -29,6 +49,10 @@ export type Sidequest = {
   screenshots: string[]
   announcement?: string
   pills: Pill[]
+  valueProps?: ValueProp[]
+  audienceSections?: AudienceSection[]
+  featureSections?: FeatureSection[]
+  useCases?: UseCase[]
   features: Feature[]
   actions: {
     primary?: Action
