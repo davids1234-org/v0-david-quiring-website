@@ -16,7 +16,8 @@
       "Bash(gh api:*)",
       "Bash(gh workflow run:*)",
       "Bash(npm run dev:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(vercel --prod:*)"
     ]
   }
 }

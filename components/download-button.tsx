@@ -4,11 +4,48 @@ import { useEffect, useState } from "react"
 
 type Platform = "mac-arm" | "mac-intel" | "windows" | "other"
 
-const DOWNLOAD_URLS = {
-  "mac-arm": "https://github.com/dvdqrng/parrot-tool/releases/download/v0.1.0-20260116185624-064d1b3/Parrot-0.1.0-arm64.dmg",
-  "mac-intel": "https://github.com/dvdqrng/parrot-tool/releases/download/v0.1.0-20260116185624-064d1b3/Parrot-0.1.0.dmg",
-  "windows": "https://github.com/dvdqrng/parrot-tool/releases/download/v0.1.0-20260116185624-064d1b3/Parrot.Setup.0.1.0.exe",
-  "other": "https://github.com/dvdqrng/parrot-tool/releases/latest",
+const GITHUB_REPO = "dvdqrng/parrot-tool"
+const FALLBACK_URL = `https://github.com/${GITHUB_REPO}/releases/latest`
+
+interface DownloadUrls {
+  "mac-arm": string
+  "mac-intel": string
+  "windows": string
+  "other": string
+}
+
+async function fetchLatestReleaseUrls(): Promise<DownloadUrls> {
+  const defaultUrls: DownloadUrls = {
+    "mac-arm": FALLBACK_URL,
+    "mac-intel": FALLBACK_URL,
+    "windows": FALLBACK_URL,
+    "other": FALLBACK_URL,
+  }
+
+  try {
+    const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/releases/latest`)
+    if (!response.ok) return defaultUrls
+
+    const release = await response.json()
+    const assets = release.assets || []
+
+    for (const asset of assets) {
+      const name = asset.name.toLowerCase()
+      const url = asset.browser_download_url
+
+      if (name.includes("arm64") && name.endsWith(".dmg")) {
+        defaultUrls["mac-arm"] = url
+      } else if (name.endsWith(".dmg") && !name.includes("arm64")) {
+        defaultUrls["mac-intel"] = url
+      } else if (name.endsWith(".exe")) {
+        defaultUrls["windows"] = url
+      }
+    }
+
+    return defaultUrls
+  } catch {
+    return defaultUrls
+  }
 }
 
 function detectPlatform(): Platform {
@@ -61,14 +98,21 @@ function detectPlatform(): Platform {
 
 export function DownloadButton() {
   const [platform, setPlatform] = useState<Platform>("other")
+  const [downloadUrls, setDownloadUrls] = useState<DownloadUrls>({
+    "mac-arm": FALLBACK_URL,
+    "mac-intel": FALLBACK_URL,
+    "windows": FALLBACK_URL,
+    "other": FALLBACK_URL,
+  })
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setPlatform(detectPlatform())
     setMounted(true)
+    fetchLatestReleaseUrls().then(setDownloadUrls)
   }, [])
 
-  const downloadUrl = DOWNLOAD_URLS[platform]
+  const downloadUrl = downloadUrls[platform]
 
   const label = mounted ? (
     platform === "mac-arm" || platform === "mac-intel" ? "Download for Mac" :
