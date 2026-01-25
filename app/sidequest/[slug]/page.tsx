@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import { TopNav } from "@/components/top-nav"
-import { DownloadButton } from "@/components/download-button"
+// import { DownloadButton } from "@/components/download-button"
 import { getSidequest, getSidequestSlugs, getAllSidequests } from "@/lib/sidequests"
 
 function ActionIcon({ type }: { type: string }) {
@@ -148,20 +148,13 @@ export default async function SidequestPage({ params }: { params: Promise<{ slug
 
         {/* CTA */}
         <div className="flex flex-wrap items-center gap-4">
-          {sidequest.actions?.secondary && (
-            <a
-              href={sidequest.actions.secondary.href}
-              className="inline-flex items-center gap-3 border border-zinc-300 rounded-full pl-5 pr-4 py-3 hover:border-zinc-400 transition-colors"
-            >
-              <span className="opacity-50">Your email address</span>
-              <span className="w-8 h-8 bg-zinc-100 rounded-full flex items-center justify-center">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </span>
-            </a>
-          )}
-          <DownloadButton />
+          <a
+            href="https://tally.so/r/RGDV8Q"
+            className="inline-flex items-center gap-2 bg-black text-white rounded-full px-5 py-3 hover:bg-zinc-800 transition-colors"
+          >
+            <span>Get Access</span>
+          </a>
+          {/* <DownloadButton /> */}
         </div>
       </section>
 
