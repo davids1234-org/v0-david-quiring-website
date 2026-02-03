@@ -128,10 +128,15 @@ export default async function SidequestPage({ params }: { params: Promise<{ slug
 
       {/* Hero */}
       <section className="container mx-auto px-4 sm:px-6 max-w-6xl pt-12 pb-8">
-        {/* Platform pill */}
-        <div className="flex items-center gap-2 mb-6">
-          <ActionIcon type="desktop" />
-          <span className="text-sm opacity-50">{sidequest.actions?.primary?.label}</span>
+        {/* App logo + Platform pill */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="w-14 h-14 rounded-2xl bg-white shadow-sm overflow-hidden relative">
+            <Image src={sidequest.logo} alt={sidequest.title} fill className="object-cover" />
+          </div>
+          <div className="flex items-center gap-2">
+            <ActionIcon type={sidequest.actions?.primary?.icon || "desktop"} />
+            <span className="text-sm opacity-50">{sidequest.actions?.primary?.label}</span>
+          </div>
         </div>
 
         {/* Headline */}
@@ -148,28 +153,48 @@ export default async function SidequestPage({ params }: { params: Promise<{ slug
 
         {/* CTA */}
         <div className="flex flex-wrap items-center gap-4">
-          <a
-            href="https://tally.so/r/RGDV8Q"
-            className="inline-flex items-center gap-2 bg-black text-white rounded-full px-5 py-3 hover:bg-zinc-800 transition-colors"
-          >
-            <span>Get Access</span>
-          </a>
-          {/* <DownloadButton /> */}
+          {sidequest.actions?.secondary && (
+            <a
+              href={sidequest.actions.secondary.href}
+              className="inline-flex items-center gap-2 bg-black text-white rounded-full px-5 py-3 hover:bg-zinc-800 transition-colors"
+            >
+              {sidequest.actions.secondary.icon && <ActionIcon type={sidequest.actions.secondary.icon} />}
+              <span>{sidequest.actions.secondary.label}</span>
+            </a>
+          )}
         </div>
       </section>
 
       {/* Hero Screenshot */}
       <section className="container mx-auto px-4 sm:px-6 max-w-6xl py-12">
         {sidequest.screenshots[0] ? (
-          <div className="rounded-2xl overflow-hidden shadow-2xl border border-zinc-200">
-            <Image
-              src={sidequest.screenshots[0]}
-              alt={sidequest.title}
-              width={1920}
-              height={1080}
-              className="w-full h-auto"
-            />
-          </div>
+          sidequest.platform === "ios" ? (
+            /* Mobile app: phone-sized screenshots, constrained to viewport height */
+            <div className="flex justify-center items-center gap-4 sm:gap-6">
+              {sidequest.screenshots.map((src, index) => (
+                <div key={index} className="rounded-[2.5rem] overflow-hidden shadow-2xl border border-zinc-200 max-h-[85vh] w-auto">
+                  <Image
+                    src={src}
+                    alt={`${sidequest.title} screenshot ${index + 1}`}
+                    width={390}
+                    height={844}
+                    className="h-full max-h-[85vh] w-auto object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            /* Desktop app: full-width screenshot */
+            <div className="rounded-2xl overflow-hidden shadow-2xl border border-zinc-200">
+              <Image
+                src={sidequest.screenshots[0]}
+                alt={sidequest.title}
+                width={1920}
+                height={1080}
+                className="w-full h-auto"
+              />
+            </div>
+          )
         ) : (
           <PlaceholderMockup />
         )}
@@ -190,11 +215,13 @@ export default async function SidequestPage({ params }: { params: Promise<{ slug
       )}
 
       {/* Big value statement */}
-      <section className="container mx-auto px-4 sm:px-6 max-w-6xl py-20">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-tight max-w-4xl">
-          {sidequest.valueProps?.[0]?.description || "The AI-powered inbox that helps you nurture thousands of relationships."}
-        </h2>
-      </section>
+      {sidequest.valueProps && sidequest.valueProps.length > 0 && (
+        <section className="container mx-auto px-4 sm:px-6 max-w-6xl py-20">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-tight max-w-4xl">
+            {sidequest.valueProps[0].description}
+          </h2>
+        </section>
+      )}
 
       {/* Value Props Cards */}
       {sidequest.valueProps && sidequest.valueProps.length > 0 && (
@@ -263,7 +290,7 @@ export default async function SidequestPage({ params }: { params: Promise<{ slug
           </h2>
 
           <p className="text-lg opacity-40 max-w-xl mb-12">
-            Parrot works for anyone who needs to manage conversations at scale - from creators to sales teams.
+            {sidequest.title} works for anyone who needs to manage conversations at scale - from creators to sales teams.
           </p>
 
           {/* Audience cards grid */}
@@ -309,7 +336,7 @@ export default async function SidequestPage({ params }: { params: Promise<{ slug
               <p className="text-sm opacity-40">{sidequest.title} &middot; {sidequest.status}</p>
             </div>
           </div>
-          <p className="text-xs opacity-30">For macOS</p>
+          <p className="text-xs opacity-30">{sidequest.actions?.primary?.label}</p>
         </div>
       </section>
     </main>
